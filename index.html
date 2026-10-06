@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#18201d" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' http:" />
+  <title>mybills — Seu dinheiro, com clareza</title>
+  <meta name="description" content="Protótipo offline para organizar receitas, despesas e simular o futuro financeiro." />
+  <link rel="stylesheet" href="styles.css?v=20261004-15" />
+</head>
+<body>
+  <section class="auth-gate" id="authGate" aria-labelledby="authTitle">
+    <div class="auth-card">
+      <div class="auth-brand"><span class="auth-logo"><img src="assets/mybills-icon.png" alt="" /></span><span class="brand-name"><b>my</b><em>bills</em></span></div>
+      <p class="eyebrow">Sua vida financeira neste aparelho</p>
+      <h1 id="authTitle">Entre para continuar</h1>
+      <p class="auth-copy" id="authCopy">Entre na sua conta local. Seus dados permanecem neste aparelho e funcionam sem internet.</p>
+      <form id="authForm">
+        <label id="authNameField" hidden>Como podemos chamar você?<input id="authName" autocomplete="name" maxlength="50" placeholder="Seu nome" /></label>
+        <label>CPF<input id="authCpf" inputmode="numeric" autocomplete="username" maxlength="14" placeholder="000.000.000-00" required /></label>
+        <label>Senha<input id="authPassword" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="Pelo menos 8 caracteres" required /></label>
+        <label id="authConfirmField" hidden>Confirmar senha<input id="authConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="Repita sua senha" /></label>
+        <p class="auth-error" id="authError" role="alert" hidden></p>
+        <button class="primary-button auth-submit" id="authSubmit" type="submit">Entrar</button>
+      </form>
+      <button class="auth-switch" id="authSwitch" type="button">Ainda não tenho conta</button>
+      <p class="auth-security">Seu CPF e sua senha são protegidos localmente. Nenhuma informação é enviada para a internet.</p>
+    </div>
+  </section>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Orbe, início">
+        <span class="brand-mark"><img src="assets/mybills-logo.png" alt="" /></span>
+        <span class="brand-name"><b>my</b><em>bills</em></span>
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <button class="nav-item active" data-view="overview">
+          <span class="nav-icon app-icon icon-home" aria-hidden="true"></span><span>Visão geral</span>
+        </button>
+        <button class="nav-item" data-view="transactions">
+          <span class="nav-icon app-icon icon-movements" aria-hidden="true"></span><span>Movimentações</span>
+        </button>
+        <button class="mobile-add-button mobile-only" id="mobileNewEntryBtn" aria-label="Adicionar lançamento"><span>＋</span></button>
+        <button class="nav-item" data-view="projection">
+          <span class="nav-icon app-icon icon-planning" aria-hidden="true"></span><span>Planejamento</span>
+        </button>
+        <button class="nav-item mobile-only" id="mobileDataBtn">
+          <span class="nav-icon app-icon icon-data" aria-hidden="true"></span><span>Dados</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="privacy-card">
+          <span class="privacy-icon">◆</span>
+          <div><strong>Offline + sincronizado</strong><small>Funciona sem internet e atualiza sua conta ao reconectar.</small></div>
+        </div>
+        <button class="nav-item" id="exportBtn"><span class="nav-icon">↓</span><span>Enviar ao celular</span></button>
+        <button class="nav-item" id="importBtn"><span class="nav-icon">↑</span><span>Receber do celular</span></button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="todayLabel"></p>
+          <h1 id="pageTitle">Seu dinheiro, <span>com clareza.</span></h1>
+        </div>
+        <div class="mobile-brand mobile-only"><span class="brand-mark"><img src="assets/mybills-logo.png" alt="" /></span><span class="brand-name"><b>my</b><em>bills</em></span></div>
+        <div class="top-actions">
+          <div class="save-status" id="saveStatus"><i></i><span>Salvamento automático</span></div>
+          <div class="account-menu"><span id="accountName">Minha conta</span><button id="logoutBtn" type="button" title="Sair da conta">Sair</button></div>
+          <button class="icon-button" id="themeToggle" title="Ativar modo claro" aria-label="Ativar modo claro"><span class="app-icon icon-theme" aria-hidden="true"></span></button>
+          <button class="icon-button" id="resetBtn" title="Apagar todos os dados">↻</button>
+          <button class="primary-button" id="newEntryBtn"><span>＋</span> Adicionar lançamento</button>
+        </div>
+      </header>
+
+      <section class="view active" id="overviewView">
+        <section class="mobile-welcome mobile-only">
+          <div><p>Organize sua vida financeira</p><h2>Seu dinheiro, com clareza.</h2></div>
+          <button class="primary-button" id="mobileHeroAddBtn"><span>＋</span> Adicionar lançamento</button>
+        </section>
+        <div class="month-control">
+          <button id="prevMonth" aria-label="Mês anterior">‹</button>
+          <strong id="selectedMonth"></strong>
+          <button id="nextMonth" aria-label="Próximo mês">›</button>
+        </div>
+
+        <section class="hero-balance">
+          <div>
+            <div class="balance-label"><span>Saldo projetado no fim do mês</span><button id="toggleBalance" aria-label="Ocultar valores">◉</button></div>
+            <div class="balance-line">
+              <h2 id="balanceValue">R$ 0,00</h2>
+              <span class="change-pill" id="balanceChange">+0%</span>
+            </div>
+            <p id="balanceHint">Depois de todas as contas previstas para este mês.</p>
+          </div>
+          <div class="health-score">
+            <div class="score-ring" id="scoreRing"><span id="scoreValue">0</span></div>
+            <div><small>Saúde financeira</small><strong id="scoreLabel">Calculando</strong></div>
+          </div>
+        </section>
+
+        <section class="metrics-grid">
+          <article class="metric-card income" data-metric="income" role="button" tabindex="0" aria-label="Ver detalhes das receitas">
+            <div class="metric-head"><span>Receitas</span><i>↗</i></div>
+            <strong id="incomeValue">R$ 0,00</strong>
+            <small id="incomeCount">0 lançamentos</small>
+          </article>
+          <article class="metric-card expense" data-metric="expense" role="button" tabindex="0" aria-label="Ver detalhes das despesas">
+            <div class="metric-head"><span>Despesas</span><i>↘</i></div>
+            <strong id="expenseValue">R$ 0,00</strong>
+            <small id="expenseCount">0 contas</small>
+          </article>
+          <article class="metric-card saved" data-metric="saved" role="button" tabindex="0" aria-label="Ver cálculo do valor livre">
+            <div class="metric-head"><span>Valor livre</span><i>◇</i></div>
+            <strong id="savedValue">R$ 0,00</strong>
+            <small id="savedRate">0% da receita</small>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel chart-panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">Fluxo financeiro</p><h3>Próximos 6 meses</h3></div>
+              <div class="legend"><span><i class="green-dot"></i>Receitas</span><span><i class="coral-dot"></i>Despesas</span></div>
+            </div>
+            <div class="chart" id="cashflowChart" aria-label="Gráfico de fluxo financeiro"></div>
+          </article>
+
+          <article class="panel bills-panel">
+            <div class="panel-head">
+              <div><p class="eyebrow">Agenda</p><h3>Próximas contas</h3></div>
+              <button class="text-button" data-go="transactions">Ver todas →</button>
+            </div>
+            <div class="bill-list" id="upcomingBills"></div>
+          </article>
+        </section>
+
+        <section class="insight-card" id="insightCard">
+          <div class="insight-mark">✦</div>
+          <div><span>Análise financeira</span><p id="insightText"></p></div>
+          <button data-go="projection">Ver planejamento →</button>
+        </section>
+      </section>
+
+      <section class="view" id="transactionsView">
+        <div class="section-heading">
+          <div><p class="eyebrow">Histórico e planejamento</p><h2>Seus lançamentos</h2></div>
+          <div class="filter-pills" id="transactionFilters">
+            <button class="active" data-filter="all">Todos</button>
+            <button data-filter="income">Receitas</button>
+            <button data-filter="expense">Despesas</button>
+          </div>
+        </div>
+        <div class="transaction-table-wrap">
+          <table>
+            <thead><tr><th>Descrição</th><th>Categoria</th><th>Vencimento</th><th>Recorrência</th><th class="right">Valor</th><th></th></tr></thead>
+            <tbody id="transactionTable"></tbody>
+          </table>
+          <div class="empty-state" id="transactionEmpty" hidden><span>○</span><h3>Nada por aqui</h3><p>Adicione seu primeiro lançamento para começar.</p></div>
+        </div>
+      </section>
+
+      <section class="view" id="projectionView">
+        <div class="section-heading">
+          <div><p class="eyebrow">Laboratório financeiro</p><h2>Simule antes de decidir</h2><p class="section-subtitle">Veja como uma compra ou mudança de renda afeta os próximos meses.</p></div>
+        </div>
+        <div class="simulator-grid">
+          <article class="panel simulator-controls">
+            <div class="panel-head"><div><p class="eyebrow">Novo cenário</p><h3>Ajuste as variáveis</h3></div></div>
+            <label>Tipo de simulação
+              <select id="simulationType"><option value="expense">Nova despesa</option><option value="income">Renda extra</option></select>
+            </label>
+            <label>Valor total <div class="input-money"><span>R$</span><input id="simulationValue" type="number" min="0" step="50" value="2400" /></div></label>
+            <label>Número de parcelas <div class="range-row"><input id="simulationInstallments" type="range" min="1" max="24" value="6" /><output id="installmentsOutput">6x</output></div></label>
+            <label>A partir de <input id="simulationStart" type="month" /></label>
+            <div class="simulation-summary">
+              <span>Impacto mensal</span><strong id="monthlyImpact">R$ 400,00</strong>
+            </div>
+          </article>
+          <article class="panel projection-panel">
+            <div class="panel-head"><div><p class="eyebrow">Resultado</p><h3>Saldo acumulado em 12 meses</h3></div><span class="scenario-badge">Cenário simulado</span></div>
+            <div class="projection-result"><small>Saldo final previsto</small><strong id="projectionFinal">R$ 0,00</strong><span id="projectionDelta">R$ 0,00 vs. cenário atual</span></div>
+            <div class="line-chart" id="projectionChart"></div>
+            <div class="projection-legend"><span><i class="base-line"></i>Cenário atual</span><span><i class="scenario-line"></i>Com simulação</span></div>
+          </article>
+        </div>
+        <article class="panel projection-table-panel">
+          <div class="panel-head"><div><p class="eyebrow">Detalhamento</p><h3>Previsão mês a mês</h3></div></div>
+          <div class="projection-months" id="projectionMonths"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="detail-overlay" id="metricDetail" hidden>
+    <aside class="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <div class="detail-head">
+        <div><p class="eyebrow" id="detailEyebrow">Detalhamento do mês</p><h2 id="detailTitle">Composição dos valores</h2></div>
+        <button id="closeDetail" aria-label="Fechar detalhes">×</button>
+      </div>
+      <div class="detail-total">
+        <span id="detailTotalLabel">Total</span>
+        <strong id="detailTotal">R$ 0,00</strong>
+        <small id="detailPeriod"></small>
+      </div>
+      <div class="detail-formula" id="detailFormula" hidden></div>
+      <div class="detail-content" id="detailContent"></div>
+    </aside>
+  </div>
+
+  <div class="mobile-data-overlay" id="mobileDataModal" hidden>
+    <section class="mobile-data-sheet" role="dialog" aria-modal="true" aria-labelledby="mobileDataTitle">
+      <div class="detail-head"><div><p class="eyebrow">Seus dados</p><h2 id="mobileDataTitle">Backup e preferências</h2></div><button id="closeMobileData" aria-label="Fechar">×</button></div>
+      <p class="mobile-data-copy">Transfira diretamente entre celular e computador pela mesma rede Wi-Fi, sem internet e sem arquivos.</p>
+      <button class="mobile-data-action primary" id="mobileExportBtn"><span>▦</span><div><strong>Enviar ao computador</strong><small>Ler o QR Code mostrado no PC</small></div></button>
+      <div class="transfer-code-row"><input id="mobileTransferCode" inputmode="numeric" maxlength="6" placeholder="Código de 6 números" /><button class="mobile-data-action" id="mobileImportBtn"><span>↓</span><div><strong>Receber do computador</strong><small>Digite o código mostrado no PC</small></div></button></div>
+      <button class="mobile-data-action" id="mobileBiometricBtn" hidden><span>◉</span><div><strong>Ativar biometria</strong><small>Desbloquear com digital ou reconhecimento facial</small></div></button>
+      <button class="mobile-data-action" id="mobileThemeBtn"><span><i class="app-icon icon-theme" aria-hidden="true"></i></span><div><strong>Alternar aparência</strong><small>Trocar entre modo claro e escuro</small></div></button>
+      <button class="mobile-data-action danger" id="mobileLogoutBtn"><span>⇥</span><div><strong>Sair da conta</strong><small>Trocar o usuário deste aparelho</small></div></button>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="transferModal" hidden>
+    <section class="transfer-modal" role="dialog" aria-modal="true" aria-labelledby="transferTitle">
+      <div class="modal-head"><div><p class="eyebrow">Transferência direta</p><h2 id="transferTitle">Conectar aparelhos</h2></div><button id="closeTransferModal" aria-label="Fechar">×</button></div>
+      <div class="transfer-visual" id="transferQrWrap" hidden><img id="transferQr" alt="QR Code temporário para transferência" /></div>
+      <div class="transfer-code" id="transferCodeWrap" hidden><span>Código temporário</span><strong id="transferCode">000 000</strong></div>
+      <p class="transfer-message" id="transferMessage"></p>
+      <small class="transfer-note">Os aparelhos precisam estar na mesma rede Wi-Fi. A conexão expira em cinco minutos e é encerrada após o uso.</small>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="entryModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><p class="eyebrow">Organize sua vida financeira</p><h2 id="modalTitle">Novo lançamento</h2></div><button id="closeModal" aria-label="Fechar">×</button></div>
+      <form id="entryForm">
+        <input type="hidden" id="entryId" />
+        <div class="type-toggle"><label><input type="radio" name="type" value="expense" checked /><span>Despesa</span></label><label><input type="radio" name="type" value="income" /><span>Receita</span></label></div>
+        <label>Descrição<input id="entryDescription" required maxlength="60" placeholder="Ex.: Aluguel, salário..." /></label>
+        <div class="form-row">
+          <label>Valor <div class="input-money"><span>R$</span><input id="entryValue" required type="number" min="0.01" step="0.01" placeholder="0,00" /></div></label>
+          <label>Vencimento<input id="entryDate" required type="date" /></label>
+        </div>
+        <div class="form-row">
+          <label>Categoria<select id="entryCategory"><option>Moradia</option><option>Alimentação</option><option>Transporte</option><option>Saúde</option><option>Lazer</option><option>Assinaturas</option><option>Salário</option><option>Freelance</option><option>Outros</option></select></label>
+          <label>Recorrência<select id="entryRecurrence"><option value="once">Somente uma vez</option><option value="monthly">Todo mês</option><option value="installments">Parcelado</option></select></label>
+        </div>
+        <label id="installmentsField" hidden>Número de parcelas<input id="entryInstallments" type="number" min="2" max="60" value="2" /></label>
+        <div class="form-actions"><button type="button" class="draft-clear-button" id="clearDraftBtn">Limpar</button><button type="submit" class="primary-button">Salvar lançamento</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js?v=20261005-1"></script>
+</body>
+</html>

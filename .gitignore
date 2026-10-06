@@ -1,0 +1,16 @@
+node_modules/
+out/
+out-v*/
+releases/
+*.log
+*.apk
+*.zip
+*.mybills
+server/data/
+.wrangler/
+.wrangler-dry-run/
+android/.gradle/
+android/**/build/
+.env
+.env.*
+!.env.example

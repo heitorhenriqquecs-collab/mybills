@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#07885B</color>
+    <color name="colorPrimaryDark">#18201D</color>
+    <color name="colorAccent">#FFB20F</color>
+    <color name="mybillsBackground">#18201D</color>
+</resources>

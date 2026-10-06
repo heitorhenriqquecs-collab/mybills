@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MyBills</string>
+    <string name="title_activity_main">MyBills</string>
+    <string name="package_name">com.mybills.app</string>
+    <string name="custom_url_scheme">com.mybills.app</string>
+</resources>

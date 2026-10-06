@@ -1,0 +1,45 @@
+{
+  "name": "mybills",
+  "productName": "mybills",
+  "version": "0.6.0",
+  "description": "Aplicativo local de planejamento financeiro pessoal com biometria e transferência direta entre aparelhos.",
+  "main": "electron-main.js",
+  "author": "Heitor",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@aparajita/capacitor-biometric-auth": "^10.0.0",
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/app": "^8.0.1",
+    "@capacitor/barcode-scanner": "^3.1.2",
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/preferences": "^8.0.0",
+    "electron-squirrel-startup": "^1.0.1",
+    "qrcode": "^1.5.4"
+  },
+  "scripts": {
+    "start": ".\\node_modules\\node\\bin\\node.exe .\\node_modules\\@electron-forge\\cli\\dist\\electron-forge.js start",
+    "package": ".\\node_modules\\node\\bin\\node.exe .\\node_modules\\@electron-forge\\cli\\dist\\electron-forge.js package",
+    "make": ".\\node_modules\\node\\bin\\node.exe .\\node_modules\\@electron-forge\\cli\\dist\\electron-forge.js make",
+    "build:web": ".\\node_modules\\node\\bin\\node.exe .\\scripts\\build-web.cjs",
+    "assets:icons": ".\\node_modules\\node\\bin\\node.exe .\\scripts\\build-brand-icons.cjs",
+    "mobile:add": "npm run build:web && cap add android",
+    "mobile:sync": "npm run build:web && cap sync android",
+    "mobile:apk": "npm run assets:icons && npm run mobile:sync && .\\node_modules\\node\\bin\\node.exe .\\scripts\\build-android.cjs",
+    "desktop:portable": "npm run assets:icons && npm run package && .\\node_modules\\node\\bin\\node.exe .\\scripts\\make-portable.cjs",
+    "backup:current": ".\\node_modules\\node\\bin\\node.exe .\\scripts\\make-current-backup.cjs"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.2",
+    "@electron-forge/cli": "^7.8.3",
+    "@electron-forge/maker-squirrel": "^7.8.3",
+    "electron": "38.8.6",
+    "node": "^22.23.3"
+  },
+  "allowScripts": {
+    "electron@38.8.6": true,
+    "electron-winstaller@5.4.4": true,
+    "node@22.23.3": true
+  }
+}

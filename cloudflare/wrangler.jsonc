@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mybills-cloud",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-04",
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mybills-cloud",
+      "database_id": "b0c01ecf-ba7a-42c9-99fa-971682ece213"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGINS": ""
+  }
+}
