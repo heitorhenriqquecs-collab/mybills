@@ -13,6 +13,12 @@ npm install
 npm start
 ```
 
+Antes de enviar alterações, valide a sintaxe dos arquivos JavaScript e atualize a versão web:
+
+```powershell
+npm run check
+```
+
 ## Aplicativos offline-first
 
 O MyBills possui agora dois alvos nativos:

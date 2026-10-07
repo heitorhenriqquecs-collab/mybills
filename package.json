@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": ".\\node_modules\\node\\bin\\node.exe .\\node_modules\\@electron-forge\\cli\\dist\\electron-forge.js start",
+    "check": ".\\node_modules\\node\\bin\\node.exe .\\scripts\\check-code.cjs && npm run build:web",
     "package": ".\\node_modules\\node\\bin\\node.exe .\\node_modules\\@electron-forge\\cli\\dist\\electron-forge.js package",
     "make": ".\\node_modules\\node\\bin\\node.exe .\\node_modules\\@electron-forge\\cli\\dist\\electron-forge.js make",
     "build:web": ".\\node_modules\\node\\bin\\node.exe .\\scripts\\build-web.cjs",
