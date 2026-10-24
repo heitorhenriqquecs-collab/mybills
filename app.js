@@ -575,7 +575,7 @@ async function init(){
   selectedDate=uiState.selectedMonth ? parseSavedMonth(uiState.selectedMonth) : new Date(now.getFullYear(), now.getMonth(), 1);
   activeFilter=uiState.activeFilter||'all';
   hiddenValues=Boolean(uiState.hiddenValues);
-  applyTheme(uiState.theme||'dark');
+  applyTheme(uiState.theme||'light');
   document.querySelector('#todayLabel').textContent=capitalize(now.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'}));
   document.querySelector('#pageTitle').innerHTML='Seu dinheiro, <span>com clareza.</span>';
   const simulation=uiState.simulation||{}; document.querySelector('#simulationType').value=simulation.type||'expense'; document.querySelector('#simulationValue').value=simulation.value||2400; document.querySelector('#simulationInstallments').value=simulation.installments||6; document.querySelector('#simulationStart').value=simulation.start||`${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2,'0')}`;

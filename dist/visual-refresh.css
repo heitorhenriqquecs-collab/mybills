@@ -1,0 +1,65 @@
+/* MyBills — a personal financial statement, 2026 */
+body[data-theme="light"]{--bg:#f7f6f1;--surface:#fffefa;--border:#dcded5;--text:#1d3027;--muted:#617168;--teal:#126947;--teal-dark:#0b5036;--mint:#e7efe7;--green:#12724b;--coral:#b65c4f;--gold:#be8a39;--gold-light:#d5ab64;--gold-soft:#faf1dc;--cream:#fffefa;background:#f7f6f1;color:#1d3027}
+body[data-theme="light"] .sidebar{width:248px;border-color:#d9ded5;background:#f0f3ed;padding:33px 17px}
+body[data-theme="light"] .brand{padding:0 11px 39px}.brand .brand-name{letter-spacing:-.065em}
+body[data-theme="light"] .nav-item{border-radius:6px;font-size:13px;min-height:45px}
+body[data-theme="light"] .nav-item.active{background:#dcebe0;color:#115b3d;box-shadow:inset 3px 0 #126947}
+body[data-theme="light"] .nav-item:hover{background:#e5ede6}
+body[data-theme="light"] .privacy-card{border-color:#d7e2d7;border-radius:7px;background:#fffefa}
+body[data-theme="light"] main{margin-left:248px;padding:0 clamp(22px,3.4vw,58px) 70px}
+body[data-theme="light"] .topbar{min-height:80px;margin:0 calc(clamp(22px,3.4vw,58px)*-1) 35px;padding:0 clamp(22px,3.4vw,58px);border-color:#d9ded5;background:#fffefa;backdrop-filter:none}
+body[data-theme="light"] .topbar h1{font-size:16px;letter-spacing:-.035em}
+body[data-theme="light"] .eyebrow{color:#587364;font-size:10px;letter-spacing:.13em}
+body[data-theme="light"] .primary-button{border-radius:6px;background:#126947;box-shadow:none;color:#fff}
+body[data-theme="light"] .primary-button:hover{background:#0d563a;box-shadow:none}
+body[data-theme="light"] .secondary-button,body[data-theme="light"] .icon-button{border-radius:6px;background:#fffefa}
+body[data-theme="light"] .month-control{margin-bottom:21px}.month-control strong{font-size:13px!important;letter-spacing:.02em}
+body[data-theme="light"] .hero-balance{min-height:245px;margin-bottom:0;padding:34px 38px;border:1px solid #124e36;border-radius:8px;background:#174d37;box-shadow:none;color:#fff}
+body[data-theme="light"] .hero-balance .balance-label{color:#d9eadf;font-size:12px;letter-spacing:.02em}
+body[data-theme="light"] .hero-balance .balance-label button{color:#d9eadf}
+body[data-theme="light"] .hero-balance .balance-line h2{color:#fff;font-size:clamp(40px,4.8vw,70px);letter-spacing:-.065em}
+body[data-theme="light"] .hero-balance p{color:#d7e7da;font-size:12px}
+body[data-theme="light"] .change-pill{background:#e2eddd;color:#19513a;border-radius:3px}
+body[data-theme="light"] .score-ring{background:conic-gradient(#d8bd77 var(--score),#46745b 0)}
+body[data-theme="light"] .score-ring:after{background:#174d37}
+body[data-theme="light"] .score-ring span{color:#fff}
+body[data-theme="light"] .health-score small{color:#d7e7da}
+body[data-theme="light"] .health-score strong{color:#fff}
+body[data-theme="light"] .metrics-grid{gap:0;margin:22px 0}
+body[data-theme="light"] .metric-card{min-height:142px;border:0;border-right:1px solid #d9ded5;border-radius:0;background:transparent;box-shadow:none;padding:14px 23px}
+body[data-theme="light"] .metric-card:first-child{padding-left:0}
+body[data-theme="light"] .metric-card:last-child{border-right:0}
+body[data-theme="light"] .metric-card strong{font-size:clamp(23px,2.4vw,34px);letter-spacing:-.055em}
+body[data-theme="light"] .metric-head{color:#52685a;font-size:12px}
+body[data-theme="light"] .metric-head i{border-radius:4px!important}
+body[data-theme="light"] .panel,body[data-theme="light"] .transaction-table-wrap{border:1px solid #d9ded5;border-radius:8px;background:#fffefa;box-shadow:none}
+body[data-theme="light"] .chart-panel{border:1px solid #d9ded5;background:#fffefa}
+body[data-theme="light"] .chart-panel h3{color:#1d3027}
+body[data-theme="light"] .chart-panel .eyebrow,body[data-theme="light"] .chart-panel .legend{color:#62766a}
+body[data-theme="light"] .chart{border-color:#e2e5db;background:repeating-linear-gradient(to bottom,transparent 0,transparent 43px,#e9eae2 44px)}
+body[data-theme="light"] .chart-group label{color:#62766a}
+body[data-theme="light"] .chart-panel .bar.income,body[data-theme="light"] .chart-panel .green-dot{background:#18734e}
+body[data-theme="light"] .chart-panel .bar.expense,body[data-theme="light"] .chart-panel .coral-dot{background:#c89852}
+body[data-theme="light"] .insight-card{border-radius:7px;background:#e6eee4;border-color:#cfdccf}
+body[data-theme="light"] .insight-mark{border-radius:5px;background:#c59b59;box-shadow:none}
+body[data-theme="light"] .section-heading{border-color:#d9ded5}
+body[data-theme="light"] .filter-pills{border-radius:6px}
+body[data-theme="light"] .filter-pills button.active{background:#dfece0;color:#155b3f}
+body[data-theme="light"] input,body[data-theme="light"] select{border-radius:5px;background:#fffefa}
+body[data-theme="light"] .modal{border-radius:9px}
+body[data-theme="dark"]{--bg:#151d18;--surface:#1e2b23;--border:#34473a;--text:#f3f1e9;--muted:#b3c0b5;--teal:#72c39a;background:#151d18}
+body[data-theme="dark"] .sidebar{background:#102017;border-color:#314438}
+body[data-theme="dark"] .hero-balance{border-radius:8px;background:#26523a;border-color:#50775a;box-shadow:none}
+body[data-theme="dark"] .metric-card,body[data-theme="dark"] .panel{border-radius:8px;box-shadow:none}
+body[data-theme="dark"] .chart-panel{background:#203b2c;border-color:#4d755a}
+body[data-theme="dark"] .topbar{background:#18251c;box-shadow:none}
+body[data-theme="dark"] .nav-item.active{border-radius:6px;box-shadow:inset 3px 0 #d1ae67;background:#31422e;color:#f8e0a5}
+body[data-theme="dark"] .primary-button{border-radius:6px;box-shadow:none}
+.auth-gate{background:#e9eee6;grid-template-columns:minmax(0,1fr) minmax(390px,480px);gap:5vw;padding:7vw}
+.auth-gate::before{content:"Seu dinheiro.\A Seu ritmo.";white-space:pre-line;display:flex;align-items:flex-end;min-height:500px;padding:5vw;background:#174d37;color:#fffefa;font-size:clamp(42px,5.5vw,88px);font-weight:800;line-height:1.03;letter-spacing:-.075em}
+.auth-card{width:100%;padding:42px;border:1px solid #d9ded5;border-radius:8px;background:#fffefa;color:#1d3027;box-shadow:none}
+.auth-brand .brand-name b{color:#126947}.auth-brand .brand-name em{color:#bd8b3c}
+.auth-card h1{color:#1d3027;font-size:34px}.auth-card .eyebrow,.auth-copy,.auth-security{color:#617168}.auth-card label{color:#354d3d;font-size:12px}.auth-card input{border-color:#ccd8ce;background:#fff;color:#1d3027}.auth-switch{color:#126947;font-size:12px}
+@media(max-width:980px){.auth-gate{grid-template-columns:1fr;place-items:center;padding:24px}.auth-gate::before{display:none}.auth-card{max-width:460px}}
+@media(max-width:720px){body[data-theme="light"] main{margin-left:0}body[data-theme="light"] .metrics-grid{gap:9px}body[data-theme="light"] .metric-card{border:1px solid #d9ded5;border-radius:6px;background:#fffefa;padding:16px}body[data-theme="light"] .metric-card:first-child{padding-left:16px}}
+@media(max-width:620px){body[data-theme="light"] .topbar{min-height:65px;margin-bottom:22px}body[data-theme="light"] .hero-balance{min-height:0;padding:26px 22px}body[data-theme="light"] .hero-balance .balance-line h2{font-size:42px}.auth-card{padding:28px 23px}}
