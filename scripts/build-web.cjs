@@ -10,4 +10,5 @@ fs.mkdirSync(outputDirectory, { recursive: true });
 
 for (const file of ['index.html', 'styles.css', 'app.js']) fs.copyFileSync(path.join(projectRoot, file), path.join(outputDirectory, file));
 fs.cpSync(path.join(projectRoot, 'assets'), path.join(outputDirectory, 'assets'), { recursive: true });
+fs.cpSync(path.join(projectRoot, 'legal'), path.join(outputDirectory, 'legal'), { recursive: true });
 console.log(`Aplicação web offline gerada em ${outputDirectory}`);

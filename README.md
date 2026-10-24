@@ -63,10 +63,14 @@ O instalador será criado dentro da pasta `out/make`. Para funcionar em computad
 - projeção automática dos próximos meses;
 - simulador de compra parcelada ou renda extra;
 - transferência direta por QR Code e código temporário, sem arquivos;
-- cadastro e login locais com CPF e senha protegida por PBKDF2;
+- cadastro e login locais com identificador escolhido pelo usuário e senha protegida por PBKDF2;
 - desbloqueio por biometria ou credencial do aparelho no Android;
 - salvamento automático de lançamentos, rascunhos, filtros, simulações e preferências de tela;
 - temas claro e escuro, com a preferência salva automaticamente;
 - primeiro acesso totalmente vazio, sem dados demonstrativos.
 
 O aplicativo começa sem lançamentos. Antes de aceitar alterações, ele aguarda o carregamento nativo; estados vazios acidentais são rejeitados e cada lançamento é confirmado no armazenamento local antes de a tela informar sucesso.
+
+## Privacidade e licença
+
+O MyBills não usa publicidade, Google Analytics nem pixels de rastreamento. Consulte [legal/index.html](legal/index.html) para informações sobre privacidade, armazenamento local, termos e reembolso. O código é disponibilizado para consulta de portfólio sob os termos de [LICENSE.md](LICENSE.md).

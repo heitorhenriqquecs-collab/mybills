@@ -15,17 +15,17 @@
       <div class="auth-brand"><span class="auth-logo"><img src="assets/mybills-icon.png" alt="" /></span><span class="brand-name"><b>my</b><em>bills</em></span></div>
       <p class="eyebrow">Sua vida financeira neste aparelho</p>
       <h1 id="authTitle">Entre para continuar</h1>
-      <p class="auth-copy" id="authCopy">Entre na sua conta local. Seus dados permanecem neste aparelho e funcionam sem internet.</p>
+      <p class="auth-copy" id="authCopy">Entre no perfil local deste aparelho. Nenhum documento pessoal é necessário.</p>
       <form id="authForm">
         <label id="authNameField" hidden>Como podemos chamar você?<input id="authName" autocomplete="name" maxlength="50" placeholder="Seu nome" /></label>
-        <label>CPF<input id="authCpf" inputmode="numeric" autocomplete="username" maxlength="14" placeholder="000.000.000-00" required /></label>
+        <label>Identificador local<input id="authIdentifier" autocomplete="username" minlength="3" maxlength="40" placeholder="Ex.: heitor" required /></label>
         <label>Senha<input id="authPassword" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="Pelo menos 8 caracteres" required /></label>
         <label id="authConfirmField" hidden>Confirmar senha<input id="authConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="Repita sua senha" /></label>
         <p class="auth-error" id="authError" role="alert" hidden></p>
         <button class="primary-button auth-submit" id="authSubmit" type="submit">Entrar</button>
       </form>
       <button class="auth-switch" id="authSwitch" type="button">Ainda não tenho conta</button>
-      <p class="auth-security">Seu CPF e sua senha são protegidos localmente. Nenhuma informação é enviada para a internet.</p>
+      <p class="auth-security">Seu identificador, sua senha e seus lançamentos ficam neste aparelho. O MyBills não usa analytics nem publicidade.</p>
     </div>
   </section>
   <div class="noise" aria-hidden="true"></div>
@@ -59,6 +59,7 @@
         </div>
         <button class="nav-item" id="exportBtn"><span class="nav-icon">↓</span><span>Enviar ao celular</span></button>
         <button class="nav-item" id="importBtn"><span class="nav-icon">↑</span><span>Receber do celular</span></button>
+        <a class="nav-item" href="legal/"><span class="nav-icon">ⓘ</span><span>Privacidade e termos</span></a>
       </div>
     </aside>
 
@@ -73,7 +74,7 @@
           <div class="save-status" id="saveStatus"><i></i><span>Salvamento automático</span></div>
           <div class="account-menu"><span id="accountName">Minha conta</span><button id="logoutBtn" type="button" title="Sair da conta">Sair</button></div>
           <button class="icon-button" id="themeToggle" title="Ativar modo claro" aria-label="Ativar modo claro"><span class="app-icon icon-theme" aria-hidden="true"></span></button>
-          <button class="icon-button" id="resetBtn" title="Apagar todos os dados">↻</button>
+          <button class="icon-button" id="resetBtn" title="Apagar todos os lançamentos" aria-label="Apagar todos os lançamentos">↻</button>
           <button class="primary-button" id="newEntryBtn"><span>＋</span> Adicionar lançamento</button>
         </div>
       </header>
@@ -221,6 +222,7 @@
       <div class="transfer-code-row"><input id="mobileTransferCode" inputmode="numeric" maxlength="6" placeholder="Código de 6 números" /><button class="mobile-data-action" id="mobileImportBtn"><span>↓</span><div><strong>Receber do computador</strong><small>Digite o código mostrado no PC</small></div></button></div>
       <button class="mobile-data-action" id="mobileBiometricBtn" hidden><span>◉</span><div><strong>Ativar biometria</strong><small>Desbloquear com digital ou reconhecimento facial</small></div></button>
       <button class="mobile-data-action" id="mobileThemeBtn"><span><i class="app-icon icon-theme" aria-hidden="true"></i></span><div><strong>Alternar aparência</strong><small>Trocar entre modo claro e escuro</small></div></button>
+      <a class="mobile-data-action" href="legal/"><span>ⓘ</span><div><strong>Privacidade e termos</strong><small>Como os dados ficam armazenados</small></div></a>
       <button class="mobile-data-action danger" id="mobileLogoutBtn"><span>⇥</span><div><strong>Sair da conta</strong><small>Trocar o usuário deste aparelho</small></div></button>
     </section>
   </div>
