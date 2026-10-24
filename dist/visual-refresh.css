@@ -119,3 +119,10 @@ body[data-theme="dark"] .modal{border-radius:9px;background:#27313a}
 .auth-card input{border-color:#52616b;background:#202a32;color:#eef3f6}.auth-switch{color:#86f399}
 @media(max-width:720px){body[data-theme="dark"] main{margin-left:0}body[data-theme="dark"] .metrics-grid{gap:9px}body[data-theme="dark"] .metric-card{border:1px solid #394651;border-radius:6px;background:#27313a;padding:16px}body[data-theme="dark"] .metric-card:first-child{padding-left:16px}}
 @media(max-width:620px){body[data-theme="dark"] .topbar{min-height:65px;margin-bottom:22px}body[data-theme="dark"] .hero-balance{min-height:0;padding:26px 22px}body[data-theme="dark"] .hero-balance .balance-line h2{font-size:42px}}
+
+/* Números e títulos preservam destaque sem letras comprimidas. */
+.brand .brand-name{letter-spacing:-.025em}
+body[data-theme] .topbar h1{letter-spacing:-.015em;line-height:1.3}
+body[data-theme] .hero-balance .balance-line h2{letter-spacing:-.025em;line-height:1.1}
+body[data-theme] .metric-card strong{letter-spacing:-.02em}
+.auth-gate::before{letter-spacing:-.035em;line-height:1.1}
